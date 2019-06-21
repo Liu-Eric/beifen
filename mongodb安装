@@ -1,0 +1,44 @@
+首先下载mongodb：
+wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.4.6.tgz
+
+tar -xvzf mongodb-linux-x86_64-3.2.10.tgz     //解压
+mv mongodb-linux-x86_64-3.2.10 /usr/local/mongodb      //将解压后的文件移动到指定目录并改名
+在mongodb目录下创建目录data/db ，以及/log目录
+
+在mongodb目录下创建目录data/db ，以及/log目录
+cd /usr/local/mongodb/    //切换到mongodb
+mkdir data  //创建data目录
+mkdir log    //创建log日志目录
+cd data       //切换到data目录
+mkdir db     //创建db 目录
+
+配置环境
+vim ~/.bashrc  
+export PATH=/usr/local/mongodb  /bin  
+source ~/.bashrc
+
+在mongodb目录下创建conf目录，并创建mongodb.conf配置文件
+mkdir /usr/local/mongodb/conf //创建conf目录
+cd conf  //切换到conf  
+touch mongodb.conf  //创建mongodb.conf配置文件
+
+配置一些信息在mongodb.conf 中：
+vim mongodb.conf
+dbpath = /usr/local/mongodb/data/db #数据文件存放目录  
+logpath = /usr/local/mongodb/log/mongodb.log #日志文件存放目录  
+port = 27017  #端口  
+fork = true  #以守护程序的方式启用，即在后台运行
+
+启动服务
+cd /usr/local/mongodb/    //切换到mongodb
+./bin/mongod --config ./conf/mongodb.conf  //启动服务
+
+连接mongodb
+cd /usr/local/mongodb/bin
+./mongo
+
+停止服务
+ cd /usr/local/mongodb/bin
+ ./mongod -shutdown -dbpath=/usr/local/mongodb/data/db  //停止mongodb
+
+
